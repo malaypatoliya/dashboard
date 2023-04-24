@@ -4,12 +4,14 @@ import Sidebar from '../../components/Layout/Sidebar/Sidebar';
 import Header from '../../components/Layout/Header/Header';
 
 const Dashboard = ({ children }) => {
+
+    const [open, setOpen] = React.useState(true);
     return (
         <>
-            <Header />
+            <Header setOpen={setOpen} open={open} />
             <Box height={64 + 'px'} />
             <Box sx={{ display: 'flex' }}>
-                <Sidebar />
+                <Sidebar open={open} />
                 <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
                     {children}
                 </Box>

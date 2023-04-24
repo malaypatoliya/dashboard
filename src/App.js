@@ -4,6 +4,7 @@ import User from "./components/User/User";
 import Login from "./components/Login";
 import ErrorPage from "./components/ErrorPage";
 import Profile from "./components/Profile/Profile";
+import Products from "./components/Product/Products";
 
 function App() {
   return (
@@ -12,6 +13,7 @@ function App() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/user" element={<User />} />
+          <Route path="/products" element={<Products />} />
           <Route path="/login" element={<Login />} />
           <Route path="profile" element={<Profile />} />
           <Route path="*" element={<ErrorPage />} />

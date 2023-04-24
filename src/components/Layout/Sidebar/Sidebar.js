@@ -3,8 +3,8 @@ import { styled, useTheme } from '@mui/material/styles';
 import Box from '@mui/material/Box';
 import MuiDrawer from '@mui/material/Drawer';
 import List from '@mui/material/List';
-import CssBaseline from '@mui/material/CssBaseline';
 import Divider from '@mui/material/Divider';
+import CssBaseline from '@mui/material/CssBaseline';
 import IconButton from '@mui/material/IconButton';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import ChevronRightIcon from '@mui/icons-material/ChevronRight';
@@ -13,9 +13,9 @@ import ListItemButton from '@mui/material/ListItemButton';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
 import { useNavigate } from 'react-router-dom';
-import { useAppStore } from '../../../AppStore';
-import HomeIcon from '@mui/icons-material/Home';
 import SupervisedUserCircleIcon from '@mui/icons-material/SupervisedUserCircle';
+import HomeRoundedIcon from '@mui/icons-material/HomeRounded';
+import CategoryIcon from '@mui/icons-material/Category';
 
 const drawerWidth = 240;
 
@@ -66,10 +66,8 @@ const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' 
     }),
 );
 
-export default function Sidebar() {
+const Sidebar = ({ open }) => {
     const theme = useTheme();
-    // const [open, setOpen] = React.useState(true);
-    const open = useAppStore(state => state.dopen);
     const navigate = useNavigate();
     return (
         <>
@@ -77,12 +75,16 @@ export default function Sidebar() {
                 <CssBaseline />
                 <Box height={30} />
                 <Drawer variant="permanent" open={open}>
+                    {/* Optional Header part */}
                     <DrawerHeader>
                         <IconButton>
                             {theme.direction === 'rtl' ? <ChevronRightIcon /> : <ChevronLeftIcon />}
                         </IconButton>
                     </DrawerHeader>
+                    
                     <Divider />
+
+                    {/* Sidebar menu list */}
                     <List>
                         <ListItem disablePadding sx={{ display: 'block' }} onClick={() => navigate('/')}>
                             <ListItemButton
@@ -99,7 +101,7 @@ export default function Sidebar() {
                                         justifyContent: 'center',
                                     }}
                                 >
-                                    <HomeIcon />
+                                    <HomeRoundedIcon />
                                 </ListItemIcon>
                                 <ListItemText primary='Home' sx={{ opacity: open ? 1 : 0 }} />
                             </ListItemButton>
@@ -124,6 +126,26 @@ export default function Sidebar() {
                                 <ListItemText primary='User' sx={{ opacity: open ? 1 : 0 }} />
                             </ListItemButton>
                         </ListItem>
+                        <ListItem disablePadding sx={{ display: 'block' }} onClick={() => navigate('/Products')}>
+                            <ListItemButton
+                                sx={{
+                                    minHeight: 48,
+                                    justifyContent: open ? 'initial' : 'center',
+                                    px: 2.5,
+                                }}
+                            >
+                                <ListItemIcon
+                                    sx={{
+                                        minWidth: 0,
+                                        mr: open ? 3 : 'auto',
+                                        justifyContent: 'center',
+                                    }}
+                                >
+                                    <CategoryIcon />
+                                </ListItemIcon>
+                                <ListItemText primary='Products' sx={{ opacity: open ? 1 : 0 }} />
+                            </ListItemButton>
+                        </ListItem>
                     </List>
 
                 </Drawer>
@@ -131,3 +153,5 @@ export default function Sidebar() {
         </>
     );
 }
+
+export default Sidebar;
