@@ -43,7 +43,7 @@ const Header = ({ open, setOpen }) => {
 
   return (
     <Box sx={{ flexGrow: 1 }}>
-      <AppBar position="fixed" elevation sx={{ backgroundColor: '#fff' }}>
+      <AppBar position="fixed" elevation sx={{ backgroundColor: '#3f51b5', color: "#fff" }}>
         <Toolbar>
 
           {/* Humberger menu */}
@@ -52,14 +52,14 @@ const Header = ({ open, setOpen }) => {
             edge="start"
             color="inherit"
             aria-label="menu"
-            sx={{ mr: 2 }}
+            sx={{ mr: 2, fontWeight: 'bold' }}
             onClick={handleDrawerOpen}
           >
             <MenuIcon />
           </IconButton>
 
           {/* For Logo or Our Website name */}
-          <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
+          <Typography variant="h6" component="div" sx={{ flexGrow: 1, fontWeight: 'bold' }}>
             Dashboard
           </Typography>
 
@@ -78,6 +78,11 @@ const Header = ({ open, setOpen }) => {
               aria-haspopup="true"
               onClick={handleMenu}
               color="inherit"
+              sx={{
+                '& svg': {
+                  fontSize: 30,
+                }
+              }}
             >
               <AccountCircle />
             </IconButton>

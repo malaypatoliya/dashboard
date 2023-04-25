@@ -69,6 +69,25 @@ const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' 
 const Sidebar = ({ open }) => {
     const theme = useTheme();
     const navigate = useNavigate();
+
+    const SideMenuList = [
+        {
+            name: 'Home',
+            icon: <HomeRoundedIcon />,
+            path: '/'
+        },
+        {
+            name: 'User',
+            icon: <SupervisedUserCircleIcon />,
+            path: '/user'
+        },
+        {
+            name: 'Products',
+            icon: <CategoryIcon />,
+            path: '/Products'
+        }
+    ]
+
     return (
         <>
             <Box sx={{ display: 'flex' }}>
@@ -81,71 +100,48 @@ const Sidebar = ({ open }) => {
                             {theme.direction === 'rtl' ? <ChevronRightIcon /> : <ChevronLeftIcon />}
                         </IconButton>
                     </DrawerHeader>
-                    
+
                     <Divider />
 
                     {/* Sidebar menu list */}
                     <List>
-                        <ListItem disablePadding sx={{ display: 'block' }} onClick={() => navigate('/')}>
-                            <ListItemButton
-                                sx={{
-                                    minHeight: 48,
-                                    justifyContent: open ? 'initial' : 'center',
-                                    px: 2.5,
-                                }}
-                            >
-                                <ListItemIcon
-                                    sx={{
-                                        minWidth: 0,
-                                        mr: open ? 3 : 'auto',
-                                        justifyContent: 'center',
-                                    }}
-                                >
-                                    <HomeRoundedIcon />
-                                </ListItemIcon>
-                                <ListItemText primary='Home' sx={{ opacity: open ? 1 : 0 }} />
-                            </ListItemButton>
-                        </ListItem>
-                        <ListItem disablePadding sx={{ display: 'block' }} onClick={() => navigate('/user')}>
-                            <ListItemButton
-                                sx={{
-                                    minHeight: 48,
-                                    justifyContent: open ? 'initial' : 'center',
-                                    px: 2.5,
-                                }}
-                            >
-                                <ListItemIcon
-                                    sx={{
-                                        minWidth: 0,
-                                        mr: open ? 3 : 'auto',
-                                        justifyContent: 'center',
-                                    }}
-                                >
-                                    <SupervisedUserCircleIcon />
-                                </ListItemIcon>
-                                <ListItemText primary='User' sx={{ opacity: open ? 1 : 0 }} />
-                            </ListItemButton>
-                        </ListItem>
-                        <ListItem disablePadding sx={{ display: 'block' }} onClick={() => navigate('/Products')}>
-                            <ListItemButton
-                                sx={{
-                                    minHeight: 48,
-                                    justifyContent: open ? 'initial' : 'center',
-                                    px: 2.5,
-                                }}
-                            >
-                                <ListItemIcon
-                                    sx={{
-                                        minWidth: 0,
-                                        mr: open ? 3 : 'auto',
-                                        justifyContent: 'center',
-                                    }}
-                                >
-                                    <CategoryIcon />
-                                </ListItemIcon>
-                                <ListItemText primary='Products' sx={{ opacity: open ? 1 : 0 }} />
-                            </ListItemButton>
-                        </ListItem>
+                        {
+                            SideMenuList.map((item, index) => (
+                                <>
+                                    <ListItem key={index} disablePadding sx={{ display: 'block' }} onClick={() => navigate(item.path)}>
+                                        <ListItemButton
+                                            sx={{
+                                                minHeight: 48,
+                                                justifyContent: open ? 'initial' : 'center',
+                                                px: 2.5,
+                                                fontWeight: 'bolder',
+                                                '&:hover': {
+                                                    color: '#3f51b5',
+                                                    fontWeight: 'bold',
+                                                },
+                                                '&:hover svg': {
+                                                    color: '#3f51b5',
+                                                },
+                                            }}
+                                        >
+                                            <ListItemIcon
+                                                sx={{
+                                                    minWidth: 0,
+                                                    mr: open ? 3 : 'auto',
+                                                    justifyContent: 'center',
+                                                    '& svg': {
+                                                        fontSize: 25,
+                                                    },
+                                                }}
+                                            >
+                                                {item.icon}
+                                            </ListItemIcon>
+                                            <ListItemText primary={item.name} style={{ fontWeight: 'bolder' }} sx={{ opacity: open ? 1 : 0, }} />
+                                        </ListItemButton>
+                                    </ListItem>
+                                </>
+                            ))
+                        }
                     </List>
 
                 </Drawer>
