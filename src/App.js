@@ -6,6 +6,8 @@ import ErrorPage from "./components/ErrorPage";
 import Profile from "./components/Profile/Profile";
 import Products from "./components/Product/Products";
 import ProductForm from "./components/Product/ProductForm";
+import Register from "./components/Register";
+
 
 function App() {
   return (
@@ -17,6 +19,7 @@ function App() {
           <Route path="/products" element={<Products />} />
           <Route path="/add-product" element={<ProductForm />} />
           <Route path="/login" element={<Login />} />
+          <Route path="/register" element={<Register />} />
           <Route path="profile" element={<Profile />} />
           <Route path="*" element={<ErrorPage />} />
         </Routes>

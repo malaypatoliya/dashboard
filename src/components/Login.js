@@ -3,7 +3,9 @@ import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import React from 'react'
 import { useNavigate } from 'react-router-dom';
-import toast, { Toaster } from 'react-hot-toast';
+import CustomInputField from './common/CustomInputField';
+import MainHeading from './common/MainHeading';
+import SubHeading from './common/SubHeading';
 
 const Login = () => {
     const navigate = useNavigate();
@@ -15,17 +17,17 @@ const Login = () => {
         },
         onSubmit: values => {
             if (values.username === 'admin' && values.password === 'admin') {
-                navigate('/')
+                navigate('/dashboard')
             } else {
-                toast('Invalid Credentials')
+                alert('Invalid Credentials')
             }
         },
         validationSchema: Yup.object({
             username: Yup.string()
-                .required('username is Required')
+                .required('Required')
                 .min(5, 'Must be 5 characters or more'),
             password: Yup.string()
-                .required('password is Required')
+                .required('Required')
                 .min(5, 'Must be 5 characters or more')
         })
     });
@@ -34,57 +36,50 @@ const Login = () => {
         <>
             <Container >
                 <Box sx={{
-                    border: '1px solid lightgray',
                     borderRadius: '10px',
-                    padding: '50px',
+                    padding: '80px 60px',
                     maxWidth: '500px',
                     margin: '100px auto',
-                    backgroundColor: 'white'
+                    backgroundColor: 'var(--my-form-bg)',
+                    boxShadow: '0 6px 7px -4px #8888880f, 0 11px 15px 1px #8888880b, 0 4px 20px 3px #88888809'
                 }}>
                     <form>
                         <Grid container style={{ rowGap: '20px' }} >
+                            {/* Title and subtitle */}
                             <Grid item xs={12}>
-                                <Typography variant='h4' style={{ textAlign: 'center' }} >
-                                    Login
+                                <MainHeading text='Assessment' />
+                                <SubHeading text='We are glad to see you again...' />
+                            </Grid>
+
+                            {/* username */}
+                            <Grid item xs={12}>
+                                <CustomInputField type='text' name='username' label='Username' formik={formik} />
+                            </Grid>
+
+                            {/* password */}
+                            <Grid item xs={12}>
+                                <CustomInputField type='password' name='password' label='Password' formik={formik} />
+                            </Grid>
+
+                            {/* Do not have account */}
+                            <Grid item xs={12}>
+                                <Typography variant='p' sx={{ mb: 0, color: 'var(--my-text-color)' }} >
+                                    Don't have an account? <Button variant='text' style={{ color: 'var(--my-main-color)' }} sx={{ p: 0, m: 0 }} onClick={() => navigate('/register')} >Create One Here</Button>
                                 </Typography>
                             </Grid>
-                            <Grid item xs={12}>
-                                <TextField
-                                    variant='standard'
-                                    type='text'
-                                    size='small'
-                                    label='Username'
-                                    fullWidth
-                                    id="username"
-                                    name='username'
-                                    value={formik.values.username}
-                                    onChange={formik.handleChange}
-                                    onBlur={formik.handleBlur}
-                                    error={formik.touched.username && formik.errors.username}
-                                    helperText={formik.touched.username && formik.errors.username}
-                                />
-                            </Grid>
 
+                            {/* login button */}
+                            <Grid item xs={0} />
                             <Grid item xs={12}>
-                                <TextField
-                                    variant='standard'
-                                    type='password'
-                                    size='small'
-                                    label='Password'
-                                    fullWidth
-                                    id="password"
-                                    name='password'
-                                    value={formik.values.password}
-                                    onChange={formik.handleChange}
-                                    onBlur={formik.handleBlur}
-                                    error={formik.touched.password && formik.errors.password}
-                                    helperText={formik.touched.password && formik.errors.password}
-                                />
-                            </Grid>
-
-                            <Grid item xs={4} />
-                            <Grid item xs={4}>
-                                <Button variant='contained' sx={{ width: '100%', mt: 2 }} type='submit' onClick={formik.handleSubmit} >Login</Button>
+                                <Button
+                                    variant='contained'
+                                    size='medium'
+                                    style={{ backgroundColor: 'var(--my-main-color)' }}
+                                    sx={{ width: '100%', mt: 0, p: 1 }}
+                                    type='submit' onClick={formik.handleSubmit}
+                                >
+                                    Login
+                                </Button>
                             </Grid>
 
                         </Grid>

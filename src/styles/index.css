@@ -6,9 +6,23 @@
     box-sizing: border-box;
 }
 
+/* define a css color variable */
+:root{
+    --my-main-color: #46a997;
+    --my-main-color-light: #46a997;
+    --my-text-color: #333;
+    --my-text-color-light: #474646;
+    --my-body: #f5f6f6;
+    --my-form-bg: #fff;
+}
+
 body{
     font-family: 'Ubuntu', sans-serif;
     min-height: 100vh;
-    background: #ECEEF1;
-    background: linear-gradient(158deg, rgb(224, 224, 224) 0%, rgb(233, 237, 254) 100%);
+    background-color: var(--my-body);
 }
+
+.inputField{
+    border-radius: 20px;
+}
+
